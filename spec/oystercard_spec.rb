@@ -2,7 +2,7 @@ require 'oystercard'
 
 describe Oystercard do
 
-  it "returns an instance of the class with a perameter" do
+  it 'returns an instance of the class with a perameter' do
     oystercard = Oystercard.new(10)
     expect(oystercard).to be_an_instance_of(Oystercard)
   end
@@ -24,6 +24,16 @@ describe Oystercard do
   it 'deducts an amount from the balance' do
     subject.top_up(50)
     expect(subject.deduct(10)).to eq 40
+  end
+
+  it 'touches in' do
+    subject.touch_in
+    expect(subject).to be_in_journey
+  end
+
+  it 'touches out' do
+    subject.touch_out
+    expect(subject).to_not be_in_journey
   end
 end
 
