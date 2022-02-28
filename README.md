@@ -1,3 +1,3 @@
 # Oystercard Challenge
-### Collaboration Between [Maria Gromovaja](https://github.com/ruiined) and [Samuel Raducan](https://github.com/samuelmbp)
+#### [Maria Gromovaja](https://github.com/ruiined) & [Samuel Raducan](https://github.com/samuelmbp)
 [Challenge Source](https://github.com/makersacademy/course/tree/main/oystercard)
