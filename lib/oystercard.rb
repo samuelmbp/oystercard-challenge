@@ -13,16 +13,13 @@ class Oystercard
     @balance += amount
   end
 
-  def deduct(amount)
-    @balance -= amount
-  end
-
   def touch_in
     insufficient_balance_error
     @in_use = true
   end
 
   def touch_out
+    deduct(MINIMUM_FARE)
     @in_use = false
   end
 
@@ -31,6 +28,10 @@ class Oystercard
   end
 
   private
+
+  def deduct(amount)
+    @balance -= amount
+  end
 
   def limit_error(amount)
     raise "Balance exceeds the limit of £#{LIMIT}" if @balance + amount >= LIMIT
