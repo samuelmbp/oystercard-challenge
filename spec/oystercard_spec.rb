@@ -2,6 +2,7 @@ require 'oystercard'
 
 describe Oystercard do
 let(:entry_station) {double(:entry_station)}
+let(:exit_station) {double(:exit_station)}
 
   it 'returns an instance of the class with a perameter' do
     oystercard = Oystercard.new(10)
@@ -29,7 +30,7 @@ let(:entry_station) {double(:entry_station)}
   end
 
   it 'touches out' do
-    subject.touch_out
+    subject.touch_out(exit_station)
     expect(subject).to_not be_in_journey
   end
 
@@ -41,7 +42,7 @@ let(:entry_station) {double(:entry_station)}
   it 'deducts the correct amount when touching out' do
     subject.top_up(20)
     subject.touch_in(entry_station)
-    expect { subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_FARE)
+    expect { subject.touch_out(exit_station) }.to change{ subject.balance }.by(-Oystercard::MINIMUM_FARE)
   end
 
   it "touch_in remembers the entry station" do
@@ -50,11 +51,28 @@ let(:entry_station) {double(:entry_station)}
     expect(subject.entry_station).to eq entry_station
   end
   
-  it "touch_out forgets the entry station" do
+  # it "touch_out forgets the entry station" do
+  #   subject.top_up(20)
+  #   subject.touch_in(entry_station)
+  #   subject.touch_out(exit_station)
+  #   expect(subject.entry_station).to be nil
+  # end
+
+  it "touch_out takes exit_station argument" do
     subject.top_up(20)
     subject.touch_in(entry_station)
-    subject.touch_out
-    expect(subject.entry_station).to be nil
+    expect(subject.touch_out(exit_station)).to_not be nil
+  end
+
+  it 'responds to an empty journeys array' do
+    expect(subject.journeys).to eq []
+  end
+
+  it "adds the stations to the journey array" do
+    subject.top_up(20)
+    subject.touch_in(entry_station)
+    subject.touch_out(exit_station)
+    expect(subject.journeys).to include(entry_station => exit_station)
   end
 end
 
