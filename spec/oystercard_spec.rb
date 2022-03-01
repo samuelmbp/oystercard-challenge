@@ -1,6 +1,7 @@
 require 'oystercard'
 
 describe Oystercard do
+let(:entry_station) {double(:entry_station)}
 
   it 'returns an instance of the class with a perameter' do
     oystercard = Oystercard.new(10)
@@ -21,14 +22,9 @@ describe Oystercard do
     expect { subject.top_up(100) }.to raise_error(message)
   end
 
-  # it 'deducts an amount from the balance' do
-  #   subject.top_up(50)
-  #   expect(subject.deduct(10)).to eq 40
-  # end
-
   it 'touches in' do
     subject.top_up(Oystercard::MINIMUM_FARE)
-    subject.touch_in
+    subject.touch_in(entry_station)
     expect(subject).to be_in_journey
   end
 
@@ -39,13 +35,26 @@ describe Oystercard do
 
   it 'does not let to touch_in if there is insufficient balance' do 
     message = "The balance is insufficient. Minimum amount of £#{Oystercard::MINIMUM_FARE} required."
-    expect { subject.touch_in }.to raise_error(message)
+    expect { subject.touch_in(entry_station) }.to raise_error(message)
   end
 
   it 'deducts the correct amount when touching out' do
     subject.top_up(20)
-    subject.touch_in
+    subject.touch_in(entry_station)
     expect { subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_FARE)
+  end
+
+  it "touch_in remembers the entry station" do
+    subject.top_up(20)
+    subject.touch_in(entry_station)
+    expect(subject.entry_station).to eq entry_station
+  end
+  
+  it "touch_out forgets the entry station" do
+    subject.top_up(20)
+    subject.touch_in(entry_station)
+    subject.touch_out
+    expect(subject.entry_station).to be nil
   end
 end
 
