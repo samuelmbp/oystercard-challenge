@@ -1,5 +1,5 @@
 class Oystercard
-  attr_reader :balance, :entry_station, :journeys
+  attr_reader :balance, :entry_station, :journeys, :exit_station
   LIMIT = 90
   MINIMUM_FARE = 1
 
@@ -21,6 +21,7 @@ class Oystercard
   def touch_out(exit_station)
     deduct(MINIMUM_FARE)
     add_journey(exit_station)
+    @exit_station = nil
   end
 
   def in_journey?
