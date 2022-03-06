@@ -1,5 +1,11 @@
 # Oystercard-app
 
+
+## Instructions
+- Fork this repo, and clone to your local machine
+- Run the command gem install bundler (if you don't have bundler already)
+- When the installation completes, run bundle
+
 ### User stories
 
 ```shell
