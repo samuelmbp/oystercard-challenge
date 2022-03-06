@@ -90,7 +90,6 @@ I need a penalty charge deducted if I fail to touch in or out
 - Rubocop (source code analysis tool - linter)
 
 ## Credits
-----
-[Maria Gromovaja](https://github.com/ruiined)  
 [Samuel Raducan](https://github.com/samuelmbp)
-[Challenge Source](https://github.com/makersacademy/course/tree/main/oystercard)
+[Maria Gromovaja](https://github.com/ruiined)  
+[Nicola Cortese](https://github.com/NicolaCortese)
