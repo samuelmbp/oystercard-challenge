@@ -25,22 +25,22 @@ irb
  3.0.0 :004 > oystercard.touch_in('Bank')
  RuntimeError (The balance is insufficient. Minimum amount of £1 required.)
 
-3.0.0 :004 > oystercard.top_up(55)
+3.0.0 :005 > oystercard.top_up(55)
  => 55 
-3.0.0 :005 > station = Station.new('Oxford St.', 1)
+3.0.0 :006 > station = Station.new('Oxford St.', 1)
  => #<Station:0x0000000153244b50 @name="Oxford St.", @zone=1> 
-3.0.0 :006 > oystercard.touch_in(station)
+3.0.0 :007 > oystercard.touch_in(station)
  => #<Station:0x0000000153244b50 @name="Oxford St.", @zone=1> 
-3.0.0 :007 > oystercard.touch_out('Bank')
+3.0.0 :008 > oystercard.touch_out('Bank')
  => [{#<Station:0x0000000153244b50 @name="Oxford St.", @zone=1>=>"Bank"}] 
-3.0.0 :008 > oystercard.journeys
+3.0.0 :009 > oystercard.journeys
  => [{#<Station:0x0000000153244b50 @name="Oxford St.", @zone=1>=>"Bank"}] 
 ```
 
 ### User stories
 
 ```shell
-  In order to use public transport
+In order to use public transport
 As a customer
 I want money on my card
 
@@ -50,7 +50,7 @@ I want to add money to my card
 
 In order to protect my money
 As a customer
-I don't want to put too much money on my card
+I don not want to put too much money on my card
 
 In order to pay for my journey
 As a customer
@@ -66,11 +66,11 @@ I need to have the minimum amount for a single journey
 
 In order to pay for my journey
 As a customer
-I need to pay for my journey when it's complete
+I need to pay for my journey when it is complete
 
 In order to pay for my journey
 As a customer
-I need to know where I've travelled from
+I need to know where I have travelled from
 
 In order to know where I have been
 As a customer
@@ -84,6 +84,10 @@ In order to be charged correctly
 As a customer
 I need a penalty charge deducted if I fail to touch in or out
 ```
+
+## Technologies
+- Ruby
+- Rubocop (source code analysis tool - linter)
 
 ## Credits
 ----
