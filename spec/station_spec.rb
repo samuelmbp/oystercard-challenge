@@ -1,13 +1,13 @@
 require 'station'
 
 describe Station do
-  let(:station) { Station.new('Station Name', 'Station Zone') }
+  let(:station) { Station.new('Oxford St.', 1) }
 
-    it 'takes a name of the station as an argument' do
-      expect(station.name).to eq('Station Name')
-    end
+  it 'prints the station name' do
+    expect(station.name).to eq('Oxford St.')
+  end
 
-    it 'takes zone of the station as an argument' do
-      expect(station.zone).to eq('Station Zone')
-    end
+  it 'prints the zone' do
+    expect(station.zone).to eq(1)
+  end
 end

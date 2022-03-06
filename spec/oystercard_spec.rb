@@ -26,15 +26,16 @@ describe Oystercard do
   
   describe '#touch_in' do
     it 'touches in' do
-      oystercard.top_up(Oystercard::MINIMUM_FARE)
+      oystercard.top_up(10)
       oystercard.touch_in(entry_station)
       expect(oystercard).to be_in_journey
     end
-    it "touch_in remembers the entry station" do
-      oystercard.top_up(20)
-      oystercard.touch_in(entry_station)
-      expect(oystercard.entry_station).to eq entry_station
-    end
+
+    # it "touch_in remembers the entry station" do
+    #   oystercard.top_up(20)
+    #   oystercard.touch_in(entry_station)
+    #   expect(oystercard.entry_station).to eq entry_station
+    # end
     it 'does not let to touch_in if there is insufficient balance' do 
       message = "The balance is insufficient. Minimum amount of £#{Oystercard::MINIMUM_FARE} required."
       expect { oystercard.touch_in(entry_station) }.to raise_error(message)
@@ -55,12 +56,13 @@ describe Oystercard do
       oystercard.touch_in(entry_station)
       expect {oystercard.touch_out(exit_station)}.to change{oystercard.balance}.by(-Oystercard::MINIMUM_FARE)
     end
-    it "forgets the exit station" do
-      oystercard.top_up(20)
-      oystercard.touch_in(entry_station)
-      oystercard.touch_out(exit_station)
-      expect(oystercard.exit_station).to be nil
-    end
+    
+    # it "forgets the exit station" do
+    #   oystercard.top_up(20)
+    #   oystercard.touch_in(entry_station)
+    #   oystercard.touch_out(exit_station)
+    #   expect(oystercard.exit_station).to be nil
+    # end
   end
 
   it 'responds to an empty journeys array' do
@@ -72,5 +74,29 @@ describe Oystercard do
     oystercard.touch_in(entry_station)
     oystercard.touch_out(exit_station)
     expect(oystercard.journeys).to include(entry_station => exit_station)
+  end
+  
+  it 'triggers the penalty fare when not touching in' do
+    oystercard.top_up(20)
+    expect {oystercard.touch_out(exit_station)}.to change{oystercard.balance}.by(-6)
+  end
+
+  it 'adds a journey with nil entry_station when not touching in' do
+    oystercard.top_up(20)
+    oystercard.touch_out(exit_station)
+    expect(oystercard.journeys).to include(nil => exit_station)
+  end
+
+  it 'adds a journey with nil exit_station when not touching out' do
+    oystercard.top_up(20)
+    oystercard.touch_in(entry_station)
+    oystercard.touch_in(entry_station)
+    expect(oystercard.journeys).to include(entry_station => nil)
+  end
+  
+  it 'triggers the penalty fare when not touching out' do
+    oystercard.top_up(20)
+    oystercard.touch_in(entry_station)
+    expect {oystercard.touch_in(entry_station)}.to change{oystercard.balance}.by(-6)
   end
 end
