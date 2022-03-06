@@ -8,4 +8,5 @@ ruby "3.0.0"
 
 group :development, :test do
   gem "rspec"
+  gem "rubocop", require false
 end
