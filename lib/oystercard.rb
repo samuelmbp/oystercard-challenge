@@ -1,8 +1,9 @@
 require_relative 'journey'
 
 class Oystercard
+
   attr_reader :balance, :journeys
-  
+
   LIMIT = 90
   DEFAULT_BALANCE = 0
   MINIMUM_FARE = 1
@@ -27,7 +28,7 @@ class Oystercard
   def touch_out(exit_station)
     @journey.finish_journey(exit_station)
     deduct(@journey.fare)
-    @journeys <<  @journey.add_journey
+    @journeys << @journey.add_journey
   end
  
   def in_journey?
@@ -48,3 +49,4 @@ class Oystercard
     raise "The balance is insufficient. Minimum amount of £#{MINIMUM_FARE} required." if @balance < MINIMUM_FARE
   end
 end
+

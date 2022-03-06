@@ -86,10 +86,10 @@ I need a penalty charge deducted if I fail to touch in or out
 ```
 
 ## Technologies
+
 - Ruby
 - Rubocop (source code analysis tool - linter)
 
 ## Credits
-[Samuel Raducan](https://github.com/samuelmbp)
-[Maria Gromovaja](https://github.com/ruiined)  
-[Nicola Cortese](https://github.com/NicolaCortese)
+
+[Samuel Raducan](https://github.com/samuelmbp) [Maria Gromovaja](https://github.com/ruiined) [Nicola Cortese](https://github.com/NicolaCortese)

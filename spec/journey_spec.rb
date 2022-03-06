@@ -6,7 +6,6 @@ describe Journey do
   let(:station) { double :station, zone: 1 }
 
   it 'understands when a journey is not complete' do
-    # expect(journey).to_not be_complete
     expect(journey.complete).to be false
   end
 
@@ -38,7 +37,6 @@ describe Journey do
   it 'completes a journey when touching in and touching out' do
     journey.start_journey(station)
     journey.finish_journey(station)
-    # expect(journey).to be_complete
     expect(journey.complete).to be true
   end
 end

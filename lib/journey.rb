@@ -19,16 +19,14 @@ class Journey
   end
 
   def failed_to_touch_in
-    if entry_station == nil
-      balance
-    end
+    return balance if entry_station.nil?
   end
 
-   def add_journey
+  def add_journey
     { @entry_station => @exit_station }
-   end
+  end
 
   def fare 
     !@entry_station || !@exit_station ? PENALTY_FARE : MINIMUM_FARE
-  end
+  end 
 end

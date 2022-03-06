@@ -36,6 +36,7 @@ describe Oystercard do
     #   oystercard.touch_in(entry_station)
     #   expect(oystercard.entry_station).to eq entry_station
     # end
+    
     it 'does not let to touch_in if there is insufficient balance' do 
       message = "The balance is insufficient. Minimum amount of £#{Oystercard::MINIMUM_FARE} required."
       expect { oystercard.touch_in(entry_station) }.to raise_error(message)
