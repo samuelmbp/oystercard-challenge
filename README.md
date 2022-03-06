@@ -6,6 +6,37 @@
 - Run the command gem install bundler (if you don't have bundler already)
 - When the installation completes, run bundle
 
+## How to use
+```shell
+cd oystercard-challenge
+
+Run the tests:
+rspec spec/
+```
+
+```shell
+irb
+3.0.0 :001 > require './lib/oystercard.rb'
+ => true 
+3.0.0 :002 > require './lib/station.rb'
+ => true 
+3.0.0 :003 > oystercard = Oystercard.new
+ => #<Oystercard:0x0000000153182c30 @balance=0, @journeys=[],... 
+ 3.0.0 :004 > oystercard.touch_in('Bank')
+ RuntimeError (The balance is insufficient. Minimum amount of £1 required.)
+
+3.0.0 :004 > oystercard.top_up(55)
+ => 55 
+3.0.0 :005 > station = Station.new('Oxford St.', 1)
+ => #<Station:0x0000000153244b50 @name="Oxford St.", @zone=1> 
+3.0.0 :006 > oystercard.touch_in(station)
+ => #<Station:0x0000000153244b50 @name="Oxford St.", @zone=1> 
+3.0.0 :007 > oystercard.touch_out('Bank')
+ => [{#<Station:0x0000000153244b50 @name="Oxford St.", @zone=1>=>"Bank"}] 
+3.0.0 :008 > oystercard.journeys
+ => [{#<Station:0x0000000153244b50 @name="Oxford St.", @zone=1>=>"Bank"}] 
+```
+
 ### User stories
 
 ```shell
